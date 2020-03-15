@@ -38,10 +38,10 @@ class Cat:
 
     """
 
-    def __init__(self, age, product):
+    def __init__(self, age):
         self.age = age
         self.saturation_level = 50
-        self.product = product
+        # self.product = product
 
         # self.average_speed = average_speed
 
@@ -97,7 +97,7 @@ class Cat:
         pass
 
     def get_average_speed(self):
-        pass
+        return self._set_average_speed()
 
 
 class Cheetah:
