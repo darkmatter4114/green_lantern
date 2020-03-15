@@ -38,23 +38,60 @@ class Cat:
 
     """
 
-    def __init__(self, age):
-        pass
+    def __init__(self, age, product):
+        self.age = age
+        self.saturation_level = 50
+        self.product = product
+
+        # self.average_speed = average_speed
 
     def eat(self, product):
-        pass
+        self.product = product
+        if self.product.__eq__('fodder'):
+            self._increase_saturation_level(10)
+        elif self.product.__eq__('apple'):
+            self._increase_saturation_level(5)
+        elif self.product.__eq__('milk'):
+            self._increase_saturation_level(2)
+        else:
+            self._increase_saturation_level(0)
 
     def _reduce_saturation_level(self, value):
-        pass
+        self.value = value
+        if int(self.saturation_level - self.value) < 0:
+            return 0
+        else:
+            return int(self.saturation_level - self.value)
 
     def _increase_saturation_level(self, value):
-        pass
+        self.value = value
+        if int(self.saturation_level + self.value) > 100:
+            return 100
+        else:
+            return int(self.saturation_level + self.value)
 
     def _set_average_speed(self):
-        pass
+        if self.age <= 7:
+            return 12
+        elif self.age > 7 and self.age <= 10:
+            return 9
+        elif self.age > 10:
+            return 6
 
     def run(self, hours):
-        pass
+        self.hours = hours
+        self.kph = self._set_average_speed() / self.hours
+        if self.kph <= 25:
+            self._reduce_saturation_level(2)
+        elif self.kph > 25 and self.kph <= 50:
+            self._reduce_saturation_level(5)
+        elif self.kph > 50 and self.kph <= 10:
+            self._reduce_saturation_level(15)
+        elif self.kph > 100 and self.kph <= 200:
+            self._reduce_saturation_level(25)
+        elif self.kph > 200:
+            self._reduce_saturation_level(50)
+        return f"Your cat ran {self.kph} kilometers"
 
     def get_saturation_level(self):
         pass
@@ -276,3 +313,16 @@ class House:
 
     def get_room_square(self):
         pass
+
+
+class Kote(Cat):
+    def hangry(self):
+        return self._increase_saturation_level(10)
+
+
+if __name__ == '__main__':
+    murka = Cat(age=10, product='apple')
+    print(murka._reduce_saturation_level(105))
+    # print(murka._increase_saturation_level(105))
+    k = Kote(age=10, product='apple')
+    print(k.run(7))
