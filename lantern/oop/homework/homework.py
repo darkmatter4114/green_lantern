@@ -45,17 +45,6 @@ class Cat:
 
         # self.average_speed = average_speed
 
-    def eat(self, product):
-        self.product = product
-        if self.product.__eq__('fodder'):
-            self._increase_saturation_level(10)
-        elif self.product.__eq__('apple'):
-            self._increase_saturation_level(5)
-        elif self.product.__eq__('milk'):
-            self._increase_saturation_level(2)
-        else:
-            self._increase_saturation_level(0)
-
     def _reduce_saturation_level(self, value):
         self.value = value
         if int(self.saturation_level - self.value) < 0:
@@ -65,10 +54,22 @@ class Cat:
 
     def _increase_saturation_level(self, value):
         self.value = value
-        if int(self.saturation_level + self.value) > 100:
-            return 100
-        else:
+        # print(self.saturation_level)
+        if int(self.saturation_level) < 100:
             return int(self.saturation_level + self.value)
+        else:
+            return 100
+
+    def eat(self, product):
+        self.product = product
+        if self.product == "fodder":
+            return self._increase_saturation_level(10)
+        elif self.product == "apple":
+            return self._increase_saturation_level(5)
+        elif self.product == "milk":
+            return self._increase_saturation_level(2)
+        else:
+            return self._increase_saturation_level(0)
 
     def _set_average_speed(self):
         if self.age <= 7:
@@ -83,27 +84,43 @@ class Cat:
         self.kph = self._set_average_speed() / self.hours
         if self.kph <= 25:
             self._reduce_saturation_level(2)
-        elif self.kph > 25 and self.kph <= 50:
+        elif 25 < self.kph <= 50:
             self._reduce_saturation_level(5)
-        elif self.kph > 50 and self.kph <= 10:
+        elif 50 < self.kph <= 10:
             self._reduce_saturation_level(15)
-        elif self.kph > 100 and self.kph <= 200:
+        elif 100 < self.kph <= 200:
             self._reduce_saturation_level(25)
         elif self.kph > 200:
             self._reduce_saturation_level(50)
         return f"Your cat ran {self.kph} kilometers"
 
     def get_saturation_level(self):
-        pass
+        return self.value+self.saturation_level
 
     def get_average_speed(self):
         return self._set_average_speed()
 
 
-class Cheetah:
+class Cheetah(Cat):
+
+    def eat(self, product):
+        self.product = product
+        if self.product == "gazelle":
+            self.__increase_saturation_level(30)
+        elif self.product == "rabbit":
+            self.__increase_saturation_level(15)
+
+    def _set_average_speed(self):
+        if self.age <= 5:
+            return 90
+        elif self.age > 5 and self.age <= 15:
+            return 75
+        elif self.age > 15:
+            return 40
+
     """
     * Inherit from class Cat
-
+    
     * Redefine method eat from parent class it will receive product value
       if product eq gazelle use _increase_saturation_level from parent class with value 30
       if product eq rabbit use _increase_saturation_level from parent class with value 15
@@ -315,14 +332,17 @@ class House:
         pass
 
 
-class Kote(Cat):
-    def hangry(self):
-        return self._increase_saturation_level(10)
+# class Kote(Cat):
+#     def hangry(self):
+#         return self._increase_saturation_level(10)
 
 
 if __name__ == '__main__':
-    murka = Cat(age=10, product='apple')
-    print(murka._reduce_saturation_level(105))
+    # murka = Cat(age=10)
+    # print(murka._reduce_saturation_level(105))
     # print(murka._increase_saturation_level(105))
-    k = Kote(age=10, product='apple')
-    print(k.run(7))
+    k = Cat(age=6)
+    # print(k._increase_saturation_level(10))
+    print(k.eat(product="fodder"))
+    print(k.get_saturation_level())
+    # print(k.eat(product="fodder"))
