@@ -88,7 +88,5 @@ class RobotFallFromAsteroid(Exception):
 if __name__ == '__main__':
     asteroid = Asteroid(20, 30)
     robot = Robot(10, 13, asteroid, "E")
-    # robot.turn_left()
     robot.move_forward(20)
-    # robot.move_forward(100)
-    # robot.move_backward()
+
