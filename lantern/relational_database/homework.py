@@ -55,7 +55,6 @@ def task_8_count_customers_by_city(cur):
         GROUP BY City
         ORDER BY COUNT(City) DESC; """)
     list = cur.fetchall()
-    print(list)
     return list
 
 
@@ -103,7 +102,6 @@ def task_14_list_products_with_supplier_information(cur):
     FROM Products 
     LEFT OUTER JOIN Suppliers ON Products.SupplierID= Suppliers. SupplierID; """)
     list = cur.fetchall()
-    print(list)
     return list
 
 
