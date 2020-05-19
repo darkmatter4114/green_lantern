@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+ Goods
+</h1>
+
+<table style="width:100%">
+ <th style="text-transform: uppercase;">id</th>
+ <th style="text-transform: uppercase;">name</th>
+ <th style="text-transform: uppercase;">brand</th>
+ <th style="text-transform: uppercase;">price</th>
+  <tr>
+   {% for item in items %}
+ <tr>
+ <td>{{ item.good_id }}</td>
+ <td>{{ item.name }}</td>
+ <td>{{ item.brand }}</td>
+ <td>{{ item.price }}</td>
+</tr>
+ {% endfor %}
+  </tr>
+</table>
+
+{% endblock %}
+

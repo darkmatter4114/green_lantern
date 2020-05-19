@@ -1,0 +1,9 @@
+table th{
+text-align: center !important;
+}
+.hero.is-primary{
+background-color: #4aac7e!important;
+}
+td{
+padding-left: 10px;
+}

@@ -1,5 +1,7 @@
-from flask import request
+from flask import request, render_template, Blueprint, app, url_for
 from flask_restful import Resource, marshal
+from werkzeug.utils import redirect
+
 
 from grocery_store.models import Good
 from grocery_store.database import db
@@ -14,6 +16,7 @@ class Goods(Resource):
                 return marshal(good, goods_structure)
             return f"No such good with id: {good_id}"
         return marshal(Good.query.all(), goods_structure)
+
 
     def post(self):
         good = Good(**request.json)
@@ -34,3 +37,5 @@ class Goods(Resource):
         db.session.delete(good)
         db.session.commit()
         return f"Successfully deleted User with id: {good_id}"
+
+
