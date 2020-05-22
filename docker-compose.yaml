@@ -1,0 +1,11 @@
+version: '3.3'
+
+services:
+  web:
+    build: .
+    command: python wsgi.py
+
+    ports:
+      - 8000:5000
+
+
