@@ -71,9 +71,9 @@ class PopulateOrders(Command):
             goods = Good.query.all()
             stores = Store.query.all()
             for user in users:
-                number_of_orders = randint(1, 5)
+                number_of_orders = randint(1, 7)
                 for _ in range(number_of_orders):
-                    number_of_goods = randint(1, 10)
+                    number_of_goods = randint(1, 7)
                     order = Order()
                     order_lines = [OrderLine(good=good) for good in sample(goods, number_of_goods)]
                     order.order_lines = order_lines

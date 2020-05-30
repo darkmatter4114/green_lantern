@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">Your orders!</h1>
+
+<table border="1" style=width:100%;">
+        <th>id</th>
+        <th>Store</th>
+        <th>Goods</th>
+        <th>Date</th>
+        <th>Summ</th>
+    {% for order in orders %}
+
+<tr>
+    <td>{{order}}</td>
+    <td>{{orders[order]['store_n']}}</td>
+    <td>
+        <table border="1" style=width:100%;">
+            <th>name</th>
+            <th>price</th>
+            {% for key, value in orders[order]['name_g'].items() %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+    </td>
+    <td>{{orders[order]['date']}}</td>
+    <td>
+        {{orders[order]['sum']}}
+    </td>
+
+
+</tr>
+    {%endfor%}
+
+</table>
+
+{% endblock %}
