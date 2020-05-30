@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+ Store
+</h1>
+
+<table border="1" style=width:100%;>
+ <th style="text-transform: uppercase;">id</th>
+ <th style="text-transform: uppercase;">name</th>
+ <th style="text-transform: uppercase;">city</th>
+ <th style="text-transform: uppercase;">address</th>
+ <th style="text-transform: uppercase;">manager_id</th>
+  <tr>
+   {% for item in items %}
+ <tr>
+ <td>{{ item.store_id }}</td>
+    <td><a href="{{ url_for('main.detail', name=item.name)}}">{{ item.name }}</a></td>
+ <td>{{ item.city }}</td>
+ <td>{{ item.address }}</td>
+    <td>{{ item.manager_id }}</td>
+</tr>
+ {% endfor %}
+  </tr>
+</table>
+
+{% endblock %}
+
