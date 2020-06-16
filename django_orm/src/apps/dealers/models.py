@@ -1,6 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.db.models import Index, UniqueConstraint
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+
+
+# from src.config import settings
 
 
 class Country(models.Model):
@@ -37,12 +43,13 @@ class City(models.Model):
         return self.name
 
 
-class Dealer(models.Model):
+class Dealer(User):
     DealerId = models.AutoField(primary_key=True)
     Title = models.CharField(max_length=32, unique=True)
     Email = models.EmailField(max_length=254)
     name = models.CharField(max_length=32, unique=True)
     CityId = models.ForeignKey('dealers.City', on_delete=models.CASCADE)
+
 
     class Meta:
         indexes = [
@@ -51,6 +58,12 @@ class Dealer(models.Model):
 
         verbose_name = _('Dealer')
         verbose_name_plural = _('Dealers')
+
+    @property
+    def full_location(self):
+        return '%s %s' % (City.name, Country.name)
+
+    print(full_location)
 
     def __str__(self):
         return self.name

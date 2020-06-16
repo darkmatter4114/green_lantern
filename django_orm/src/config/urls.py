@@ -20,6 +20,10 @@ from django.urls import path
 from django.views.generic import TemplateView
 from apps.newsletters.views import NewsLetterView
 from common.views import LoginView, logout_view
+from apps.orders.views import OrdreDetailView
+from  apps.orders.views import IndexView
+
+from apps.orders.models import Order
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,6 +31,8 @@ urlpatterns = [
     path("newsletter/", NewsLetterView.as_view(), name="newsletter"),
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", logout_view, name="logout"),
+    path("filter/", OrdreDetailView.as_view(), name="order-detail"),
+    path("index/", IndexView.as_view(), name="view"),
 ]
 
 

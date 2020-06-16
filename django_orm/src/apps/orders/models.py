@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import Index
 from django.utils.translation import gettext_lazy as _
-# from phone_field import PhoneField
 
 
 class Order(models.Model):
@@ -17,20 +16,14 @@ class Order(models.Model):
         (STATUS_ARCHIVED, "Archived"),
     )
 
-    car = models.ForeignKey(
-        "cars.Car",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=False,
-        related_name="orders",
-    )
+    models.ManyToManyField(to='cars.Car', related_name='orders')
+
     status = models.CharField(
         max_length=19, choices=STATUS_CHOICES, default=STATUS_RESERVED, blank=True
     )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
-    # phone = PhoneField(blank=True, help_text="Contact phone number")
     message = models.CharField(max_length=255)
 
     class Meta:
@@ -39,5 +32,12 @@ class Order(models.Model):
         verbose_name = _("Order")
         verbose_name_plural = _("Orders")
 
+    @property
+    def full_info(self):
+        return f'{self.first_name} {self.last_name} {self.car} : {self.status}'
+
     def __str__(self):
         return self.status
+
+
+
